@@ -1,6 +1,6 @@
 {
   "name": "consul-kiev",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Opinionated extraction of values from consul kv store for node.",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
+    "prettier": "1.7.4",
     "proxyquire": "^1.7.11",
     "sinon": "^1.17.7"
   }

@@ -36,4 +36,4 @@ API
 License
 ------------------------
 
-MIT. Copyright 2017: SHRM, Brian Moelk.
+MIT. Copyright 2017: SHRM, @bmoelk.
