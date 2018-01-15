@@ -81,6 +81,10 @@ describe("ConsulKiev", function() {
           Value: null
         },
         {
+          Key: "foo/bar/filename.json",
+          Value: "[1,2,3]"
+        },
+        {
           Key: "foo/bar/service/",
           Value: null
         },
@@ -98,6 +102,7 @@ describe("ConsulKiev", function() {
         }
       ];
       consulMock.expected = {
+        "filename.json": [1,2,3],
         service: {
           url: "http://httpbin.org/",
           action: "GET"
@@ -126,7 +131,7 @@ describe("ConsulKiev", function() {
     it("should transform all values from received keys", function(done) {
       sinon.spy(c, "_transformValue");
       c.getValues("foo/bar", function(err, results) {
-        assert.equal(c._transformValue.callCount, 3);
+        assert.equal(c._transformValue.callCount, 4);
         c._transformValue.restore();
         done();
       });
@@ -144,6 +149,14 @@ describe("ConsulKiev", function() {
       c.getValues("/foo/bar", function(err, results) {
         assert.isNull(err);
         assert.deepEqual(results, consulMock.expected);
+        done();
+      });
+    });
+
+    it("should support keys with . in them", function(done){
+      c.getValues("/foo/bar", function(err, results) {
+        assert.isNull(err);
+        assert.property(results, 'filename.json');
         done();
       });
     });

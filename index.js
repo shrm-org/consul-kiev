@@ -1,7 +1,7 @@
 "use strict";
 
-var lodash = require("lodash");
-var consul = require("consul");
+const lodash = require("lodash");
+const consul = require("consul");
 
 class ConsulKiev {
   constructor(host, port) {
@@ -43,7 +43,7 @@ class ConsulKiev {
         return;
       }
 
-      let key = lodash.slice(node.Key.split("/"), keySegments).join(".");
+      let key = lodash.slice(node.Key.split("/"), keySegments);
       lodash.set(values, key, this._transformValue(node.Value));
     });
     return values;
