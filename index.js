@@ -2,6 +2,7 @@
 
 const lodash = require("lodash");
 const consul = require("consul");
+const universalify = require("universalify");
 
 class ConsulKiev {
   constructor(host, port) {
@@ -10,6 +11,7 @@ class ConsulKiev {
       secure: true,
       port: port || 8500
     });
+    this.getValues = universalify.fromCallback(this.getValues);
   }
 
   _transformValue(value) {
@@ -51,16 +53,14 @@ class ConsulKiev {
 
   // callback(err, values)
   getValues(key, callback) {
-    return new Promise((resolve, reject) => {
-      this.consul.kv.get({ key: key, recurse: true }, (err, result) => {
-        if (err != null) {
-          return callback ? callback(err, null) : reject(err);
-        }
+    this.consul.kv.get({ key: key, recurse: true }, (err, result) => {
+      if (err != null) {
+        return callback(err, null);
+      }
 
-        let values = this.processValues(key, result);
+      let values = this.processValues(key, result);
 
-        return callback ? callback(null, values) : resolve(values);
-      });
+      return callback(null, values);
     });
   }
 }

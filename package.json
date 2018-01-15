@@ -1,9 +1,9 @@
 {
   "name": "consul-kiev",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Opinionated extraction of values from consul kv store for node.",
   "main": "index.js",
-  "bin":{
+  "bin": {
     "consul-kiev": "./bin/consul-kiev.js"
   },
   "scripts": {
@@ -26,8 +26,10 @@
   "homepage": "https://github.com/shrm-org/consul-kiev#readme",
   "dependencies": {
     "consul": "^0.27.0",
+    "fs-extra": "^5.0.0",
     "lodash": "^4.17.4",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "universalify": "^0.1.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
